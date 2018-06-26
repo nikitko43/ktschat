@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static "core/styles.css" %}">
+</head>
+<body>
+    <header>
+        <div class = 'chat_header'>
+            Продам гараж
+            <span class="logout"><a class="exit-btn" href="{% url "core:logout" %}">Выйти</a></span>
+        </div>
+    </header>
+    <script src="{% static "core/jquery-3.3.1.min.js" %}"></script>
+    <script src="{% static "core/setup.js" %}"></script>
+    <script src="{% static "core/chat.js" %}"></script>
+    <div class = 'chat'>
+        {% for m in messages %}
+        <div class = 'message' data-id='{{ m.id }}'>
+            <div class = 'message__author'>
+                <div class = 'message__avatar'></div>
+                <span class = 'message__name'> {{ m.author }} </span>
+                <span class = 'message__time'>{{ m.time }}</span>
+            </div>
+            <div class = 'message__text'> {{ m.text }} </div>
+        </div>
+        {% endfor %}
+    </div>
+    <form class = 'input' action="{% url "core:message_create" %}" id="send_message" method="post">
+        {% csrf_token %}
+        <div class = 'input__attach'></div>
+        <input type="text" id="message_input" value="" name="text" placeholder="Введите сообщение" autocomplete="off"/>
+        <button type="submit" class = 'input__send'></button>
+    </form>
+</body>
+</html>

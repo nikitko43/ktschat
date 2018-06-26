@@ -1,0 +1,10 @@
+{% for m in messages %}
+        <div class = 'message' data-id='{{ m.id }}'>
+            <div class = 'message__author'>
+                <div class = 'message__avatar'></div>
+                <span class = 'message__name'> {{ m.author }} </span>
+                <span class = 'message__time'>{{ m.time }}</span>
+            </div>
+            <div class = 'message__text'> {{ m.text }} </div>
+        </div>
+{% endfor %}

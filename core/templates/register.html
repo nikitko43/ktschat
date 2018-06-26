@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+</head>
+<body>
+<div class="container" style="width: 500px; margin-top: 10%">
+<form action='/register/' method='post' class="form-signin">
+    {% csrf_token %}
+    <h2 class="form-signin-heading">Регистрация:</h2>
+    {% for field in form %}
+    <div class="form-group">
+        <label for="{{ field.id_from_label }}" class="" >
+            {{ field.label }}
+        </label>
+        <br/>
+        {{ field.as_widget }}
+        </div>
+        {% endfor %}
+    <button type="submit" class="btn btn-lg btn-primary btn-block">Регистрация</button>
+</form>
+</div>
+</body>
+</html>

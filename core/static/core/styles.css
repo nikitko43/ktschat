@@ -1,0 +1,120 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background: white;
+    font-family: Roboto, sans-serif;
+    font-weight: 300;
+}
+
+a {
+    text-decoration: none;
+}
+
+.exit-btn {
+    color: white;
+}
+
+.exit-btn:hover {
+    color: white;
+}
+
+header {
+    margin: 0px 15%;
+}
+
+.message {
+    padding: 20px;
+    border-bottom: 1px solid #F0F0F0;
+}
+
+.message__avatar {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+    display: inline-block;
+    vertical-align: top;
+    background: url('avatar.png') no-repeat center;
+    background-size: contain;
+}
+
+
+.logout {
+    font-size: 16px;
+    float: right;
+    padding-right: 20px
+}
+
+.chat_header {
+    background-color: #2090FF;
+    font-size: 20px;
+    padding: 20px 0px 20px 20px;
+    color: white;
+
+}
+
+.message__author {
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.message__time {
+    color: #777777;
+    display: inline-block;
+    line-height: 30px;
+    float: right;
+    font-size: 1rem;
+}
+
+.message__text {
+    padding-left: 75px ;
+}
+
+.chat {
+    height: calc(100% - 80px - 70px);
+    margin: 0px 15%;
+    overflow: auto;
+    border: 1px solid #f0f0f0;
+}
+
+.input {
+    background-color: #F2F2F2;
+    height: 80px;
+    width: 70%;
+    margin: 0px 15%;
+    display: inline-block;
+    overflow:hidden;
+}
+
+.input__attach {
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    margin: 0px 20px 0 20px;
+    vertical-align: middle;
+    background: url('attach.ico') no-repeat center;
+    background-size: contain;
+}
+
+input {
+    background-color: #F2F2F2;
+    width: calc(100% - 30px - 150px);
+    outline: none;
+    border: none;
+    height: 100%;
+    font-size: 16px;
+    overflow: hidden;
+}
+
+.input__send {
+    height: 30px;
+    width: 30px;
+    margin: 0px 20px 0 20px;
+    vertical-align: middle;
+    display: inline-block;
+    background: url('send.png') no-repeat center;
+    background-size: contain;
+    border: none;
+    outline: none;
+}
