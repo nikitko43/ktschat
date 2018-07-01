@@ -2,6 +2,8 @@ from django.conf.urls import url
 from django.contrib import admin
 from core.views import ChatView, ChatLoginView, MessageCreateView, logout, create_user, redirect, MessagesView
 
+app_name = 'core'
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^chat/', ChatView.as_view(), name='chat'),

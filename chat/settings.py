@@ -125,3 +125,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGIN_URL = '/login/'
+
+_PATH = os.path.abspath(os.path.dirname(__file__))
+
+MEDIA_ROOT = 'chat/media/'
+MEDIA_URL = '/media/'

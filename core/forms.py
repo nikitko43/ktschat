@@ -26,7 +26,7 @@ class ChatUserCreationForm(UserCreationForm):
 class MessageCreateForm(forms.ModelForm):
     class Meta:
         model = Message
-        fields = ['text',]
+        fields = ['text', 'attached_file']
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')

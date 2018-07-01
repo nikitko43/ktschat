@@ -10,7 +10,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils import timezone
 from django.views.generic import TemplateView, CreateView
-from django.forms import forms
+from django.forms import forms, model_to_dict
 
 from core.forms import LoginForm, MessageCreateForm, ChatUserCreationForm
 from core.models import Message
@@ -34,8 +34,9 @@ class MessagesView(LoginRequiredMixin, TemplateView):
         data = super().get_context_data(**kwargs)
         last_id = self.request.GET.get('last_id')
 
-        messages = Message.objects.filter(id__gt=last_id).order_by('-id')
-
+        messages = Message.objects.filter(id__gt=last_id).order_by('id')
+        if messages:
+            print(model_to_dict(messages[0]))
         data['messages'] =  messages
         return data
 
@@ -66,22 +67,21 @@ class MessageCreateView(CreateView):
         kwargs['user'] = self.request.user
         return kwargs
 
+    def form_invalid(self, form):
+        print('asdasdasda')
+        return HttpResponse('Хуйня')
+
     def form_valid(self, form):
+        print('asdasdasda')
         super().form_valid(form)
-        return JsonResponse({
-            'id': self.object.id,
-            'text': self.object.text,
-            'author': self.object.author.username,
-            'time': self.object.time,
-            'rendered_template': render_to_string('message.html', {'m': self.object}, self.request)
-        })
+        return HttpResponse('')
 
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('core:login'))
 
 def redirect(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         return HttpResponseRedirect(reverse('core:chat'))
     else:
         return HttpResponseRedirect(reverse('core:login'))

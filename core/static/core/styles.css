@@ -72,7 +72,7 @@ header {
 }
 
 .chat {
-    height: calc(100% - 80px - 70px);
+    height: calc(100% - 80px - 60px);
     margin: 0px 15%;
     overflow: auto;
     border: 1px solid #f0f0f0;
@@ -80,11 +80,24 @@ header {
 
 .input {
     background-color: #F2F2F2;
-    height: 80px;
+    height: 70px;
     width: 70%;
     margin: 0px 15%;
     display: inline-block;
     overflow:hidden;
+}
+
+.attached_file{
+    height: 30px;
+    margin: 0px 15%;
+    border: 1px solid #f0f0f0;
+    background-color: #F2F2F2;
+    display: none;
+}
+
+.attached_file_span{
+    margin: 0px 25px;
+    line-height: 30px;
 }
 
 .input__attach {
@@ -97,20 +110,28 @@ header {
     background-size: contain;
 }
 
+
 input {
     background-color: #F2F2F2;
-    width: calc(100% - 30px - 150px);
+    width: calc(100% - 30px - 130px);
     outline: none;
     border: none;
     height: 100%;
-    font-size: 16px;
+    font-size: 14px;
     overflow: hidden;
+}
+
+#button_attach {
+    position:absolute;
+    left:calc(15% + 10px);
+    bottom: 20px;
+    opacity:0;
 }
 
 .input__send {
     height: 30px;
     width: 30px;
-    margin: 0px 20px 0 20px;
+    margin: 0px 10px 0 20px;
     vertical-align: middle;
     display: inline-block;
     background: url('send.png') no-repeat center;
