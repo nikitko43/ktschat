@@ -57,6 +57,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'chat.urls'
 
+AUTHENTICATION_BACKENDS = (
+     'django.contrib.auth.backends.ModelBackend',
+)
+
+AUTH_USER_MODEL = 'core.Profile'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

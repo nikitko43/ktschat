@@ -7,6 +7,9 @@ from django.urls import reverse
 
 from core.models import Message
 
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
 class LoginForm(AuthenticationForm):
     username = UsernameField(max_length=64,
                              widget=forms.TextInput(attrs={'autofocus': True, 'class': 'form-control', 'placeholder': "Введите имя пользователя"}))
@@ -18,6 +21,10 @@ class LoginForm(AuthenticationForm):
 
 
 class ChatUserCreationForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ("username", "avatar")
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():

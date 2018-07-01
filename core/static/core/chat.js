@@ -64,7 +64,7 @@ $(document).ready(function() {
                 if (result.toString().indexOf('<title>') + 1) {
                     window.location.replace('../login');
                 }
-                else if (result !== ""){
+                else if (result !== "\n" + "\n"){
                     $('.chat').append(result);
                     $(".chat").animate({ scrollTop: $(".chat")[0].scrollHeight}, 800);
                 }

@@ -12,17 +12,22 @@ from django.utils import timezone
 from django.views.generic import TemplateView, CreateView
 from django.forms import forms, model_to_dict
 
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
 from core.forms import LoginForm, MessageCreateForm, ChatUserCreationForm
 from core.models import Message
 
 
 class ChatView(LoginRequiredMixin, TemplateView):
-    template_name = 'base.html'
+    template_name = 'chat.html'
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
 
         data['messages'] = Message.objects.all()
+        data['avatars'] = User.objects.filter(username__in=data['messages'].values_list('author')).all()
+        data['users_avatars'] = data['avatars'].values_list('username', flat=True).exclude(avatar='')
         data['title'] = "Тип чат"
         return data
 
@@ -35,9 +40,10 @@ class MessagesView(LoginRequiredMixin, TemplateView):
         last_id = self.request.GET.get('last_id')
 
         messages = Message.objects.filter(id__gt=last_id).order_by('id')
-        if messages:
-            print(model_to_dict(messages[0]))
-        data['messages'] =  messages
+
+        data['messages'] = messages
+        data['avatars'] = User.objects.filter(username__in=data['messages'].values_list('author')).all()
+        data['users_avatars'] = data['avatars'].values_list('username', flat=True).exclude(avatar='')
         return data
 
 class ChatLoginView(LoginView):
@@ -68,11 +74,9 @@ class MessageCreateView(CreateView):
         return kwargs
 
     def form_invalid(self, form):
-        print('asdasdasda')
-        return HttpResponse('Хуйня')
+        return HttpResponse('')
 
     def form_valid(self, form):
-        print('asdasdasda')
         super().form_valid(form)
         return HttpResponse('')
 
@@ -86,11 +90,12 @@ def redirect(request):
     else:
         return HttpResponseRedirect(reverse('core:login'))
 
-def create_user(request):
+def register_user(request):
     if request.method == 'POST':
         form = ChatUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
+            print(form.cleaned_data['avatar'])
             return HttpResponseRedirect(reverse('core:chat'))
         else:
             return HttpResponse("123")
@@ -98,3 +103,20 @@ def create_user(request):
     else:
         form = ChatUserCreationForm()
         return render(request, 'register.html', {'form': form})
+
+class RegisterUser(CreateView):
+    form_class = ChatUserCreationForm
+
+    def get(self, request, *args, **kwargs):
+        return HttpResponseNotAllowed(['post'])
+
+    def get_success_url(self):
+        return reverse('core:chat')
+
+    def form_invalid(self, form):
+        return HttpResponse('Invalid form')
+
+    def form_valid(self, form):
+        super().form_valid(form)
+        return HttpResponseRedirect(reverse('core:login'))
+

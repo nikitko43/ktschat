@@ -37,6 +37,7 @@ header {
     vertical-align: top;
     background: url('avatar.png') no-repeat center;
     background-size: contain;
+    border-radius: 50%;
 }
 
 
